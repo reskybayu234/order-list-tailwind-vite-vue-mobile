@@ -13,6 +13,12 @@ export default {
       fontWeight: {
         pudar: "50",
       },
+      spacing: {
+        84: "340px",
+      },
+      height: {
+        98: "430px",
+      },
     },
   },
   plugins: [require("flowbite/plugin"), require("daisyui")],
