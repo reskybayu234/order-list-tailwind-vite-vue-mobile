@@ -24,7 +24,7 @@ import Navbar from "./components/Navbar.vue";
             </svg>
           </label>
         </div>
-        <div class="flex-1 px-2 mx-2 text-white">Oruduru Listo</div>
+        <div class="flex-1 px-2 mx-2 text-white font-Poppins">Oruduru Listo</div>
         <div class="flex-none hidden lg:block">
           <ul class="menu text-white menu-horizontal">
             <!-- Navbar menu content here -->

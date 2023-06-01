@@ -8,7 +8,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#002D74",
+        primary: "#191d91",
       },
       fontWeight: {
         pudar: "50",
@@ -18,6 +18,11 @@ export default {
       },
       height: {
         98: "430px",
+      },
+      fontFamily: {
+        Montserrat: ["Montserrat", "sans-serif"],
+        Poppins: ["Poppins", "sans-serif"],
+        Roboto: ["Roboto Condensed", "sans-serif"],
       },
     },
   },
