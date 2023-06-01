@@ -17,12 +17,13 @@
     "@fortawesome/vue-fontawesome": "^3.0.3",
     "@heroicons/vue": "^2.0.18",
     "@mdi/js": "^7.2.96",
+    "axios": "^1.4.0",
     "daisyui": "^2.52.0",
     "flowbite": "^1.6.5",
     "mdi-vue": "^3.0.13",
     "pinia": "^2.1.3",
     "vue": "^3.2.47",
-    "vue-router": "^4.2.1"
+    "vue-router": "^4.0.13"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.1.0",

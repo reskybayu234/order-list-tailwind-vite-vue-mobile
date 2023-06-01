@@ -18,7 +18,7 @@ export default {
         84: "340px",
       },
       height: {
-        98: "430px",
+        98: "500px",
       },
       fontFamily: {
         Montserrat: ["Montserrat", "sans-serif"],
