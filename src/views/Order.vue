@@ -14,7 +14,7 @@ import { useOrderStore } from "../store/order.js";
 <template>
   <div>
     <section>
-      <div class="flex w-full px-6 my-8 justify-between">
+      <div class="mobile flex w-full px-6 my-8 justify-between">
         <div class="flex items-center">
           <select
             id="small"
@@ -52,10 +52,70 @@ import { useOrderStore } from "../store/order.js";
           </div>
         </div>
       </div>
+      <div class="desktop flex justify-between px-6 my-8">
+        <div class="flex w-64">
+          <select
+            class="select text-gray-400 border-2 bg-gray-200 border-primary w-full max-w-xs"
+          >
+            <option disabled selected>Filter Status</option>
+            <option>Lunas</option>
+            <option>Belum Lunas</option>
+            <option>Cancel</option>
+          </select>
+        </div>
+        <div class="flex ml-5">
+          <form class="w-96">
+            <label
+              for="default-search"
+              class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+              >Search</label
+            >
+            <div class="relative">
+              <div
+                class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  ></path>
+                </svg>
+              </div>
+              <input
+                type="search"
+                id="default-search"
+                class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Search Mockups, Logos..."
+                required
+              />
+              <button
+                type="submit"
+                class="text-white absolute right-2.5 bottom-2.5 bg-primary hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                Search
+              </button>
+            </div>
+          </form>
+          <div class="flex">
+            <button class="ml-5 bg-primary text-white rounded-xl p-3 h-12">
+              ADD ORDER
+            </button>
+          </div>
+        </div>
+      </div>
     </section>
     <section>
       <!-- DESKTOP VERSION -->
-      <div class="desktop mx-6 overflow-x-auto">
+      <div class="desktop mx-6">
         <table class="table w-full">
           <!-- head -->
           <thead>
@@ -73,26 +133,91 @@ import { useOrderStore } from "../store/order.js";
             <tr>
               <th>1</th>
               <td>Cy Ganderton</td>
-              <td>Quality Control Specialist</td>
+              <td>08652673889</td>
               <td>Blue</td>
-              <td>Lunas</td>
-              <td><button class=""></button></td>
+              <td>
+                <span
+                  class="inline-flex items-center bg-red-100 text-red-800 text-md font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300"
+                >
+                  Belum Lunas
+                </span>
+              </td>
+              <td>
+                <div class="dropdown dropdown-hover">
+                  <label tabindex="0" class="bg-actionBtn btn m-1"
+                    ><font-awesome-icon
+                      :icon="['fas', 'bars']"
+                      style="color: #ffffff"
+                  /></label>
+                  <ul
+                    tabindex="0"
+                    class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+                  >
+                    <li><a>Item 1</a></li>
+                    <li><a>Item 2</a></li>
+                  </ul>
+                </div>
+              </td>
             </tr>
             <!-- row 2 -->
             <tr class="hover">
               <th>2</th>
               <td>Hart Hagerty</td>
-              <td>Desktop Support Technician</td>
+              <td>08652673889</td>
               <td>Purple</td>
-              <td>Lunas</td>
+              <td>
+                <span
+                  class="inline-flex items-center bg-green-100 text-green-800 text-md font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300"
+                >
+                  Lunas
+                </span>
+              </td>
+              <td>
+                <div class="dropdown dropdown-hover">
+                  <label tabindex="0" class="bg-actionBtn btn m-1"
+                    ><font-awesome-icon
+                      :icon="['fas', 'bars']"
+                      style="color: #ffffff"
+                  /></label>
+                  <ul
+                    tabindex="0"
+                    class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+                  >
+                    <li><a>Item 1</a></li>
+                    <li><a>Item 2</a></li>
+                  </ul>
+                </div>
+              </td>
             </tr>
             <!-- row 3 -->
             <tr>
               <th>3</th>
               <td>Brice Swyre</td>
-              <td>Tax Accountant</td>
+              <td>08652673889</td>
               <td>Red</td>
-              <td>Lunas</td>
+              <td>
+                <span
+                  class="inline-flex items-center bg-green-100 text-green-800 text-md font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300"
+                >
+                  Lunas
+                </span>
+              </td>
+              <td>
+                <div class="dropdown dropdown-hover">
+                  <label tabindex="0" class="bg-actionBtn btn m-1"
+                    ><font-awesome-icon
+                      :icon="['fas', 'bars']"
+                      style="color: #ffffff"
+                  /></label>
+                  <ul
+                    tabindex="0"
+                    class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+                  >
+                    <li><a>Item 1</a></li>
+                    <li><a>Item 2</a></li>
+                  </ul>
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>

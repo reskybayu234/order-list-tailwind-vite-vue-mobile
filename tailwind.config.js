@@ -9,6 +9,7 @@ export default {
     extend: {
       colors: {
         primary: "#191d91",
+        actionBtn : "#4f46e5"
       },
       fontWeight: {
         pudar: "50",
