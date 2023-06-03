@@ -7,10 +7,21 @@ export const useOrderStore = defineStore("order", {
   }),
 
   actions: {
-    async fetchOrder() {
-      const order = await axios.get("http://localhost:7000/order");
-      console.log("order", order);
-      return order;
+    fetchOrder() {
+      console.log("MASUK");
+      return new Promise((resolve, reject) => {
+        axios
+          .get("http://localhost:7000/order")
+          .then((res) => {
+            console.log("RES", res);
+          })
+          .catch((err) => {
+            console.log({ err });
+          });
+      });
+      // const order = axios.get("http://localhost:7000/order");
+      // console.log("order", order);
+      // return order;
     },
   },
 });

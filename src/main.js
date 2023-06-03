@@ -12,6 +12,8 @@ import { faUser as farUser } from "@fortawesome/free-regular-svg-icons";
 
 import piniaPersist from 'pinia-plugin-persist'
 
+import './api/axios'
+
 import mdiVue from "mdi-vue/v3";
 import * as mdijs from "@mdi/js";
 
