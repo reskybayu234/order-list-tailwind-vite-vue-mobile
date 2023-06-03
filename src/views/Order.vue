@@ -182,12 +182,12 @@ console.log("orderData", orderData);
                     <span
                       class="inline-flex items-center border border-4 p-1 mr-2 text-sm font-semibold text-gray-800 bg-green-300 rounded-full dark:bg-gray-700 dark:text-gray-300"
                     >
-                      {{ item.status }}
+                      {{ item.status.toUpperCase() }}
                     </span>
                   </td>
                   <td v-else>
                     <span
-                      class="inline-flex items-center border border-2 p-1 mr-2 text-sm text-gray-800 bg-red-300 rounded-full dark:bg-gray-700 dark:text-gray-300"
+                      class="inline-flex items-center border border-2 p-1 font-semibold mr-2 text-sm text-gray-800 bg-red-300 rounded-full dark:bg-gray-700 dark:text-gray-300"
                     >
                       {{ item.status }}
                     </span>
@@ -255,104 +255,108 @@ console.log("orderData", orderData);
             class="mobile card border overflow-auto h-98 border-primary border-2 mx-auto w-84 bg-gray-100 shadow-xl"
           >
             <div class="card-body">
-              <div class="flex mx-5">
-                <div class="flex-none font-bold text-gray-400">Nama</div>
-                <div class="grow"></div>
-                <div class="flex-none font-bold text-gray-400">Whatsapp</div>
+              <div v-for="(item, index) in orderData.data.docs" :key="index">
+                <div class="flex">
+                  <div class="flex-1">
+                    <div class="font-bold text-gray-400">Nama</div>
+                    <div class="font-bold">
+                      {{ item.name }}
+                    </div>
+                  </div>
+                  <div class="flex-1 text-end">
+                    <div class="font-bold text-gray-400">Whatsapp</div>
+
+                    <div class="font-bold">{{ item.phone }}</div>
+                  </div>
+                </div>
+
+                <div class="flex mt-4">
+                  <div class="flex-1">
+                    <div class="font-bold text-gray-400">Edisi</div>
+                    <div class="font-bold">
+                      {{ item.namaEdisi }}
+                    </div>
+                  </div>
+                  <div class="flex-1 text-end">
+                    <div class="font-bold text-gray-400">Status</div>
+
+                    <div>
+                      <div v-if="item.status == 'Lunas'">
+                        <span
+                          class="inline-flex items-center justify-center w-24 text-xs text-gray-800 bg-green-300 rounded-full dark:bg-gray-700 dark:text-gray-300"
+                        >
+                          {{ item.status.toUpperCase() }}
+                        </span>
+                      </div>
+                      <div v-else>
+                        <span
+                          class="inline-flex items-center border w-24 justify-center border-2 text-xs text-gray-800 bg-red-300 rounded-full dark:bg-gray-700 dark:text-gray-300"
+                        >
+                          {{ item.status }}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mx-24 mt-2">
+                  <div class="dropdown dropdown-hover mx-2">
+                    <label tabindex="0" class="bg-primary btn"
+                      ><font-awesome-icon
+                        :icon="['fas', 'bars']"
+                        style="color: #ffffff; margin: 0px"
+                    /></label>
+                    <ul
+                      class="dropdown-content menu p-2 shadow bg-base-100 rounded-box"
+                    >
+                      <li>
+                        <div
+                          class="tooltip tooltip-right px-0 mx-0 w-16 py-0 my-0"
+                          data-tip="view detail"
+                        >
+                          <button
+                            type="button"
+                            class="text-blue-700 hover:text-white w-16 border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg border-2 text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
+                          >
+                            <font-awesome-icon :icon="['fas', 'eye']" />
+                          </button>
+                        </div>
+                      </li>
+                      <li>
+                        <div
+                          class="tooltip tooltip-right px-0 mx-0 w-16 py-0 my-0"
+                          data-tip="edit order"
+                        >
+                          <button
+                            type="button"
+                            class="text-purple-700 hover:text-white w-16 border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg border-2 text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900"
+                          >
+                            <font-awesome-icon :icon="['fas', 'pen']" />
+                          </button>
+                        </div>
+                      </li>
+                      <li>
+                        <div
+                          class="tooltip tooltip-right px-0 mx-0 w-16 py-0 my-0"
+                          data-tip="delete order"
+                        >
+                          <button
+                            type="button"
+                            class="text-red-700 hover:text-white w-16 border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center border-2 mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
+                          >
+                            <font-awesome-icon :icon="['fas', 'trash-can']" />
+                          </button>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="bg-gray-300 rounded-xl h-1 my-3"></div>
               </div>
-              <div class="flex">
-                <div class="flex-none font-bold">Itadori Yuji</div>
-                <div class="grow"></div>
-                <div class="flex-none font-bold">082342747922</div>
-              </div>
-              <div class="flex mx-5 mt-5">
-                <div class="flex-none font-bold text-gray-400">Edisi</div>
-                <div class="grow"></div>
-                <div class="flex-none font-bold mr-3 text-gray-400">Status</div>
-              </div>
-              <div class="flex">
-                <div class="flex-none font-bold">Lathifa Series</div>
-                <div class="grow"></div>
-                <div class="flex-none font-bold mr-2">Belum Lunas</div>
-              </div>
-              <div class="mx-auto">
-                <button class="bg-primary rounded-xl h-8 w-16">
-                  <font-awesome-icon
-                    :icon="['fas', 'bars']"
-                    style="color: #ffffff"
-                  />
-                </button>
-              </div>
-              <div class="bg-gray-300 rounded-xl h-1"></div>
-              <div class="flex mx-5">
-                <div class="flex-none font-bold text-gray-400">Nama</div>
-                <div class="grow"></div>
-                <div class="flex-none font-bold text-gray-400">Whatsapp</div>
-              </div>
-              <div class="flex">
-                <div class="flex-none font-bold">Itadori Yuji</div>
-                <div class="grow"></div>
-                <div class="flex-none font-bold">082342747922</div>
-              </div>
-              <div class="flex mx-5 mt-5">
-                <div class="flex-none font-bold text-gray-400">Edisi</div>
-                <div class="grow"></div>
-                <div class="flex-none font-bold mr-3 text-gray-400">Status</div>
-              </div>
-              <div class="flex">
-                <div class="flex-none font-bold">Lathifa Series</div>
-                <div class="grow"></div>
-                <div class="flex-none font-bold mr-2">Belum Lunas</div>
-              </div>
-              <div class="mx-auto">
-                <button class="bg-primary rounded-xl h-8 w-16">
-                  <font-awesome-icon
-                    :icon="['fas', 'bars']"
-                    style="color: #ffffff"
-                  />
-                </button>
-              </div>
-              <div class="bg-gray-300 rounded-xl h-1"></div>
-              <div class="flex mx-5">
-                <div class="flex-none font-bold text-gray-400">Nama</div>
-                <div class="grow"></div>
-                <div class="flex-none font-bold text-gray-400">Whatsapp</div>
-              </div>
-              <div class="flex">
-                <div class="flex-none font-bold">Itadori Yuji</div>
-                <div class="grow"></div>
-                <div class="flex-none font-bold">082342747922</div>
-              </div>
-              <div class="flex mx-5 mt-5">
-                <div class="flex-none font-bold text-gray-400">Edisi</div>
-                <div class="grow"></div>
-                <div class="flex-none font-bold mr-3 text-gray-400">Status</div>
-              </div>
-              <div class="flex">
-                <div class="flex-none font-bold">Lathifa Series</div>
-                <div class="grow"></div>
-                <div class="flex-none font-bold mr-2">Belum Lunas</div>
-              </div>
-              <div class="mx-auto">
-                <button class="bg-primary rounded-xl h-8 w-16">
-                  <font-awesome-icon
-                    :icon="['fas', 'bars']"
-                    style="color: #ffffff"
-                  />
-                </button>
-              </div>
-              <div class="bg-gray-300 rounded-xl h-1"></div>
             </div>
           </div>
         </section>
-        <!-- <section>
-      <div class="btn-group float-right mt-3 mr-4">
-        <button class="btn btn-md">1</button>
-        <button class="btn btn-md btn-active">2</button>
-        <button class="btn btn-md">3</button>
-        <button class="btn btn-md">4</button>
-      </div>
-    </section> -->
+
         <footer
           class="footer absolute items-center bottom-0 pb-8 mt-8 p-3 h-10 bg-primary text-neutral-content"
         >
