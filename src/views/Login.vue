@@ -1,3 +1,14 @@
+<script setup>
+import { useAuthStore } from "../store/auth";
+import { ref } from "vue";
+
+const authStore = useAuthStore();
+
+const form = ref({
+  email: "",
+  password: "",
+});
+</script>
 <template>
   <section class="flex items-center justify-center absolute inset-0">
     <div
@@ -15,6 +26,7 @@
         </p>
 
         <input
+          v-model="form.email"
           type="email"
           placeholder="Email"
           class="focus:outline-none focus:ring focus:ring-violet-300 py-3 px-4 md:w-96 w-[300px] mt-8 rounded-[20px] border border-0 border-[#002D74]"
@@ -22,6 +34,7 @@
 
         <div class="relative">
           <input
+            v-model="form.password"
             type="password"
             placeholder="Password"
             class="focus:outline-none focus:ring focus:ring-violet-300 py-3 px-4 md:w-96 w-[300px] mt-4 rounded-[20px] border border-0 border-[#002D74]"
@@ -45,6 +58,7 @@
         </div>
 
         <button
+          @click="authStore.login(form)"
           class="bg-[#002D74] w-[300px] md:w-96 mt-6 py-3 text-1xl rounded-[20px] text-white py-2 hover:scale-105 duration-300 font-markazi"
         >
           Login

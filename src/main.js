@@ -10,6 +10,8 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { faUser as farUser } from "@fortawesome/free-regular-svg-icons";
 
+import piniaPersist from 'pinia-plugin-persist'
+
 import mdiVue from "mdi-vue/v3";
 import * as mdijs from "@mdi/js";
 
@@ -20,6 +22,7 @@ library.add(fas);
 const pinia = createPinia();
 const app = createApp(App);
 app.use(pinia);
+pinia.use(piniaPersist)
 app.use(mdiVue, {
   icons: mdijs,
 });
