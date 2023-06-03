@@ -1,8 +1,23 @@
 <script setup>
 import { useAuthStore } from "../store/auth";
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
 const authStore = useAuthStore();
+const route = useRoute();
+const router = useRouter();
+let data = ref();
+
+function log(form) {
+  authStore.login(form);
+  data = computed(() => {
+    return authStore.getData;
+  });
+  console.log("data", data);
+  if (data) {
+    router.push({ path: "/order" });
+  }
+}
 
 const form = ref({
   email: "",
@@ -58,7 +73,7 @@ const form = ref({
         </div>
 
         <button
-          @click="authStore.login(form)"
+          @click="log(form)"
           class="bg-[#002D74] w-[300px] md:w-96 mt-6 py-3 text-1xl rounded-[20px] text-white py-2 hover:scale-105 duration-300 font-markazi"
         >
           Login

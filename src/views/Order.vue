@@ -252,7 +252,7 @@ console.log("orderData", orderData);
           <!-- ================= -->
           <!-- MOBILE VERSION -->
           <div
-            class="mobile card border overflow-auto h-98 border-primary border-2 mx-auto w-84 bg-gray-100 shadow-xl"
+            class="mobile card border overflow-auto overflow-x-hidden h-98 border-primary border-2 mx-auto w-84 bg-gray-100 shadow-xl"
           >
             <div class="card-body">
               <div v-for="(item, index) in orderData.data.docs" :key="index">
@@ -300,18 +300,20 @@ console.log("orderData", orderData);
                 </div>
 
                 <div class="mx-24 mt-2">
-                  <div class="dropdown dropdown-hover mx-2">
+                  <div
+                    class="dropdown dropdown-hover dropdown-right dropdown-end mx-2"
+                  >
                     <label tabindex="0" class="bg-primary btn"
                       ><font-awesome-icon
                         :icon="['fas', 'bars']"
                         style="color: #ffffff; margin: 0px"
                     /></label>
                     <ul
-                      class="dropdown-content menu p-2 shadow bg-base-100 rounded-box"
+                      class="dropdown-content menu w-20 p-2 shadow bg-base-100 rounded-box"
                     >
                       <li>
                         <div
-                          class="tooltip tooltip-right px-0 mx-0 w-16 py-0 my-0"
+                          class="tooltip tooltip-left px-0 mx-0 w-16 py-0 my-0"
                           data-tip="view detail"
                         >
                           <button
@@ -324,7 +326,7 @@ console.log("orderData", orderData);
                       </li>
                       <li>
                         <div
-                          class="tooltip tooltip-right px-0 mx-0 w-16 py-0 my-0"
+                          class="tooltip tooltip-left px-0 mx-0 w-16 py-0 my-0"
                           data-tip="edit order"
                         >
                           <button
@@ -337,7 +339,7 @@ console.log("orderData", orderData);
                       </li>
                       <li>
                         <div
-                          class="tooltip tooltip-right px-0 mx-0 w-16 py-0 my-0"
+                          class="tooltip tooltip-left px-0 mx-0 w-16 py-0 my-0"
                           data-tip="delete order"
                         >
                           <button
