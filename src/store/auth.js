@@ -8,14 +8,32 @@ export const useAuthStore = defineStore("auth", {
     accessToken: null,
     refreshToken: null,
     email: null,
+    data : null,
   }),
+  getters : {
+    getData(){
+      return this.data
+    }
+  },
   actions: {
-    async login(payload) {
-      const response = await axios.post("http://localhost:7000/login", payload);
-
-      this.accessToken = response.data.accessToken;
-      this.refreshToken = response.data.refreshToken;
-      this.email = response.data.email;
+    login(payload) {
+      let data;
+      new Promise((resolve, reject) => {
+        axios
+          .post("http://localhost:7000/login", payload)
+          .then((response) => {
+            this.accessToken = response.data.accessToken;
+            this.refreshToken = response.data.refreshToken;
+            this.email = response.data.email;
+            this.data = response
+            resolve(response);
+          })
+          .catch((err) => {
+            console.error(err);
+            reject(err);
+          });
+      });
+      // const response = await axios.post("http://localhost:7000/login", payload);
     },
   },
   persist: {
