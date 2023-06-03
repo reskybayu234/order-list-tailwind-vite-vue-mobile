@@ -8,7 +8,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#191d91",
+        primary: "#0f1954",
         actionBtn : "#4f46e5"
       },
       fontWeight: {

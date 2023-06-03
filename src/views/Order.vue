@@ -1,10 +1,20 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { useOrderStore } from "../store/order.js";
 
 const orderStore = useOrderStore();
 
-const orderData = orderStore.fetchOrder();
+let data = {
+  page: "1",
+  itemsPerPage: "10",
+  search: "",
+};
+
+orderStore.fetchOrder(data);
+
+const orderData = computed(() => {
+  return orderStore.getOrder;
+});
 
 console.log("orderData", orderData);
 </script>
@@ -89,9 +99,9 @@ console.log("orderData", orderData);
           <div class="desktop flex justify-between px-6 my-8">
             <div class="flex w-64">
               <select
-                class="select text-gray-400 border-2 bg-gray-200 border-primary w-full max-w-xs"
+                class="select border-2 bg-gray-200 border-primary w-full max-w-xs"
               >
-                <option disabled selected>Filter Status</option>
+                <option selected>Filter Status</option>
                 <option>Lunas</option>
                 <option>Belum Lunas</option>
                 <option>Cancel</option>
@@ -163,22 +173,28 @@ console.log("orderData", orderData);
                 </tr>
               </thead>
               <tbody>
-                <!-- row 1 -->
-                <tr>
-                  <th>1</th>
-                  <td>Cy Ganderton</td>
-                  <td>08652673889</td>
-                  <td>Blue</td>
-                  <td>
+                <tr v-for="(item, index) in orderData.data.docs" :key="index">
+                  <td>{{ index + 1 }}</td>
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.phone }}</td>
+                  <td>{{ item.namaEdisi }}</td>
+                  <td v-if="item.status == 'Lunas'">
                     <span
-                      class="inline-flex items-center bg-red-100 text-red-800 text-md font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300"
+                      class="inline-flex items-center border border-4 p-1 mr-2 text-sm font-semibold text-gray-800 bg-green-300 rounded-full dark:bg-gray-700 dark:text-gray-300"
                     >
-                      Belum Lunas
+                      {{ item.status }}
+                    </span>
+                  </td>
+                  <td v-else>
+                    <span
+                      class="inline-flex items-center border border-2 p-1 mr-2 text-sm text-gray-800 bg-red-300 rounded-full dark:bg-gray-700 dark:text-gray-300"
+                    >
+                      {{ item.status }}
                     </span>
                   </td>
                   <td>
                     <div class="dropdown dropdown-hover">
-                      <label tabindex="0" class="bg-actionBtn btn m-1"
+                      <label tabindex="0" class="bg-primary btn"
                         ><font-awesome-icon
                           :icon="['fas', 'bars']"
                           style="color: #ffffff"
@@ -187,68 +203,45 @@ console.log("orderData", orderData);
                         tabindex="0"
                         class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
                       >
-                        <li><a>Item 1</a></li>
-                        <li><a>Item 2</a></li>
-                      </ul>
-                    </div>
-                  </td>
-                </tr>
-                <!-- row 2 -->
-                <tr class="hover">
-                  <th>2</th>
-                  <td>Hart Hagerty</td>
-                  <td>08652673889</td>
-                  <td>Purple</td>
-                  <td>
-                    <span
-                      class="inline-flex items-center bg-green-100 text-green-800 text-md font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300"
-                    >
-                      Lunas
-                    </span>
-                  </td>
-                  <td>
-                    <div class="dropdown dropdown-hover">
-                      <label tabindex="0" class="bg-actionBtn btn m-1"
-                        ><font-awesome-icon
-                          :icon="['fas', 'bars']"
-                          style="color: #ffffff"
-                      /></label>
-                      <ul
-                        tabindex="0"
-                        class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
-                      >
-                        <li><a>Item 1</a></li>
-                        <li><a>Item 2</a></li>
-                      </ul>
-                    </div>
-                  </td>
-                </tr>
-                <!-- row 3 -->
-                <tr>
-                  <th>3</th>
-                  <td>Brice Swyre</td>
-                  <td>08652673889</td>
-                  <td>Red</td>
-                  <td>
-                    <span
-                      class="inline-flex items-center bg-green-100 text-green-800 text-md font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300"
-                    >
-                      Lunas
-                    </span>
-                  </td>
-                  <td>
-                    <div class="dropdown dropdown-hover">
-                      <label tabindex="0" class="bg-actionBtn btn m-1"
-                        ><font-awesome-icon
-                          :icon="['fas', 'bars']"
-                          style="color: #ffffff"
-                      /></label>
-                      <ul
-                        tabindex="0"
-                        class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
-                      >
-                        <li><a>Item 1</a></li>
-                        <li><a>Item 2</a></li>
+                        <li>
+                          <div
+                            class="tooltip tooltip-right px-0 mx-0 w-16 py-0 my-0"
+                            data-tip="view detail"
+                          >
+                            <button
+                              type="button"
+                              class="text-blue-700 hover:text-white w-16 border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg border-2 text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
+                            >
+                              <font-awesome-icon :icon="['fas', 'eye']" />
+                            </button>
+                          </div>
+                        </li>
+                        <li>
+                          <div
+                            class="tooltip tooltip-right px-0 mx-0 w-16 py-0 my-0"
+                            data-tip="edit order"
+                          >
+                            <button
+                              type="button"
+                              class="text-purple-700 hover:text-white w-16 border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg border-2 text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900"
+                            >
+                              <font-awesome-icon :icon="['fas', 'pen']" />
+                            </button>
+                          </div>
+                        </li>
+                        <li>
+                          <div
+                            class="tooltip tooltip-right px-0 mx-0 w-16 py-0 my-0"
+                            data-tip="delete order"
+                          >
+                            <button
+                              type="button"
+                              class="text-red-700 hover:text-white w-16 border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center border-2 mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
+                            >
+                              <font-awesome-icon :icon="['fas', 'trash-can']" />
+                            </button>
+                          </div>
+                        </li>
                       </ul>
                     </div>
                   </td>

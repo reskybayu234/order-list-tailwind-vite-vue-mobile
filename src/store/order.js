@@ -4,18 +4,26 @@ import axios from "axios";
 export const useOrderStore = defineStore("order", {
   state: () => ({
     name: "Lepputoppu",
+    order: [],
   }),
-
+  getters: {
+    getOrder() {
+      return this.order;
+    },
+  },
   actions: {
-    fetchOrder() {
-      console.log("MASUK");
+    fetchOrder(data) {
       return new Promise((resolve, reject) => {
         axios
-          .get("http://localhost:7000/order")
+          .get(
+            `http://localhost:7000/order?page=${data.page}&limit=${data.itemsPerPage}&search=${data.search}`
+          )
           .then((res) => {
-            console.log("RES", res);
+            this.order = res.data;
+            resolve(res.data);
           })
           .catch((err) => {
+            reject(err);
             console.log({ err });
           });
       });
